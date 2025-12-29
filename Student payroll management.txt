@@ -1,0 +1,72 @@
+import java.util.*;
+
+class Student {
+    int id;
+    String name;
+    double basicPay, allowance;
+
+    Student(int id, String name, double basicPay, double allowance) {
+        this.id = id;
+        this.name = name;
+        this.basicPay = basicPay;
+        this.allowance = allowance;
+    }
+
+    double grossSalary() {
+        return basicPay + allowance;
+    }
+}
+
+class Payroll extends Student {
+    double tax;
+
+    Payroll(int id, String name, double basicPay, double allowance, double tax) {
+        super(id, name, basicPay, allowance);
+        this.tax = tax;
+    }
+
+    double netSalary() {
+        return grossSalary() - tax;
+    }
+
+    void displayPayslip() {
+        System.out.println("\n--- PAYSLIP ---");
+        System.out.println("ID: " + id);
+        System.out.println("Name: " + name);
+        System.out.println("Gross Salary: " + grossSalary());
+        System.out.println("Tax: " + tax);
+        System.out.println("Net Salary: " + netSalary());
+    }
+}
+
+public class StudentPayroll {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Student ID: ");
+        int id = sc.nextInt();
+
+        sc.nextLine();
+        System.out.print("Student Name: ");
+        String name = sc.nextLine();
+
+        System.out.print("Basic Pay: ");
+        double basic = sc.nextDouble();
+
+        System.out.print("Allowance: ");
+        double allowance = sc.nextDouble();
+
+        System.out.print("Tax: ");
+        double tax = sc.nextDouble();
+
+        Payroll p = new Payroll(id, name, basic, allowance, tax);
+        p.displayPayslip();
+    }
+}
+
+
+------------------------------------------------------------------------------------------------------------------
+
+Gross Salary = Basic Pay + Allowance
+Deduction = Tax + Leave Deduction
+Net Salary = Gross Salary – Deduction
